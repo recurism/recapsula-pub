@@ -3,9 +3,9 @@ use crate::primitives::Byte;
 mod decoder;
 
 pub struct RawInstruction {
-    destination: Byte,
-    opcode: Byte,
-    operand: Byte,
+    pub destination: Byte,
+    pub opcode: Byte,
+    pub operand: Byte,
 }
 
 pub fn read(encoded_bytecode: &str) -> Vec<RawInstruction> {
