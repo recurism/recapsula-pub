@@ -14,15 +14,21 @@ pub enum ProfileRole {
 }
 
 #[derive(Default)]
-struct SlotProfile {
-    writes: Vec<usize>,
-    handler_refs: Vec<usize>,
-    operand_refs: Vec<usize>,
-    role: ProfileRole,
+pub struct SlotProfile {
+    pub writes: Vec<usize>,
+    pub handler_refs: Vec<usize>,
+    pub operand_refs: Vec<usize>,
+    pub role: ProfileRole,
 }
 
 pub struct Metadata {
     profiles: HashMap<u16, SlotProfile>,
+}
+
+impl Metadata {
+    pub fn query(&self, id: u16) -> Option<&SlotProfile> {
+        self.profiles.get(&id)
+    }
 }
 
 pub fn traverse(ingested_instructions: &[RawInstruction]) -> Metadata {
