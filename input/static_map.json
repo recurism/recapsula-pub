@@ -1,0 +1,24 @@
+[
+  {
+    "id": 18,
+    "arity": 2,
+    "depth": 2,
+    "signature": {
+      "type": "Binary",
+      "op": "Add",
+      "lhs": { "Arg": 0 },
+      "rhs": { "Arg": 1 }
+    }
+  },
+  {
+    "id": 20,
+    "arity": 2,
+    "depth": 2,
+    "signature": {
+      "type": "Binary",
+      "op": "Add",
+      "lhs": { "Arg": 0 },
+      "rhs": { "Arg": 1 }
+    }
+  }
+]
