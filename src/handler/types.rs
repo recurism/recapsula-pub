@@ -4,11 +4,26 @@ use serde::Deserialize;
 
 pub type OpcodeMap = HashMap<u16, Opcode>;
 
+#[derive(Debug, Clone)]
+pub enum ResolvedOperand {
+    Arg(usize),
+    Constant(f64),
+}
+
 #[derive(Debug, Clone, Deserialize)]
 #[serde(untagged)]
 pub enum OperandSource {
-    Arg { Arg: usize },
-    Constant { Constant: f64 },
+    Arg { #[serde(rename = "Arg")] arg: usize },
+    Constant { #[serde(rename = "Constant")] constant: f64 },
+}
+
+impl OperandSource {
+    pub fn decode(&self) -> ResolvedOperand {
+        match self {
+            OperandSource::Arg { arg: n } => ResolvedOperand::Arg(*n),
+            OperandSource::Constant { constant: v } => ResolvedOperand::Constant(*v),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize)]

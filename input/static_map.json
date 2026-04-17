@@ -2,7 +2,7 @@
   {
     "id": 18,
     "arity": 2,
-    "depth": 2,
+    "depth": 3,
     "signature": {
       "type": "Binary",
       "op": "Add",
@@ -11,14 +11,14 @@
     }
   },
   {
-    "id": 20,
-    "arity": 2,
+    "id": 16,
+    "arity": 1,
     "depth": 2,
     "signature": {
       "type": "Binary",
-      "op": "Add",
-      "lhs": { "Arg": 0 },
-      "rhs": { "Arg": 1 }
+      "op": "ShiftLeft",
+      "lhs": { "Constant": 1 },
+      "rhs": { "Arg": 0 }
     }
   }
 ]

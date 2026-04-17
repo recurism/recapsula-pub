@@ -1,11 +1,13 @@
 mod errors;
 mod handler;
 mod ingest;
-mod primitives;
+mod ir;
 mod resolver;
 mod survey;
 
 use errors::LiftError;
+
+use crate::resolver::Resolver;
 
 pub fn lift(encoded_bytecode: String, opcode_map_path: &str) -> Result<(), LiftError> {
     let static_map = std::fs::read_to_string(opcode_map_path).map_err(|e| LiftError::Io {
@@ -14,11 +16,13 @@ pub fn lift(encoded_bytecode: String, opcode_map_path: &str) -> Result<(), LiftE
     })?;
 
     let registry = handler::Registry::from_json(&static_map)?;
-    println!("opcode map ({} entries):", registry.entries.len());
-    println!("{:?}", registry.entries);
+    println!("opcode map ({:?} entries):", registry.entries.len());
 
     let ingested_instructions = ingest::read(&encoded_bytecode)?;
-    survey::traverse(&ingested_instructions);
+    let metadata = survey::traverse(&ingested_instructions);
+
+    let mut resolver = Resolver::new(&ingested_instructions, &metadata, &registry);
+    resolver.handle_instructions()?;
 
     Ok(())
 }

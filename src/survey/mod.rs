@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::ingest::RawInstruction;
+use crate::ir::RawInstruction;
 
 #[derive(Default, PartialEq, Debug)]
 pub enum ProfileRole {

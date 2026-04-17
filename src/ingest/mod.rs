@@ -1,14 +1,8 @@
 use base64::DecodeError;
 
-use crate::primitives::Byte;
+use crate::ir::RawInstruction;
 
 mod decoder;
-
-pub struct RawInstruction {
-    pub destination: Byte,
-    pub opcode: Byte,
-    pub operand: Byte,
-}
 
 pub fn read(encoded_bytecode: &str) -> Result<Vec<RawInstruction>, DecodeError> {
     let decoded_bytecode = decoder::decode(encoded_bytecode)?;
